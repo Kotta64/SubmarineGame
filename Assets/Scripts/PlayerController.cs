@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private float muki;
     private float a;
     private float currentTime;
-    private float timeS;
 
     void Start()
     {
@@ -24,13 +23,10 @@ public class PlayerController : MonoBehaviour
         Radar = rb.transform.Find("Dentan").gameObject;
         rotateSpeed = 0.0F;
         muki = 0.0F;
-        timeS = 0.0f;
     }
 
     void Update()
     {
-        timeS += Time.deltaTime;
-
         //スロットル調整
         if (Input.GetKeyDown(KeyCode.W)) GameManager.instance.throttle += 1;
         if (Input.GetKeyDown(KeyCode.S)) GameManager.instance.throttle -= 1;
@@ -65,11 +61,7 @@ public class PlayerController : MonoBehaviour
         //電探
         if (Input.GetKeyDown(KeyCode.L)) GameManager.instance.radar = !GameManager.instance.radar;
         if (transform.position.y < -7.5F) GameManager.instance.radar = false;
-        if (GameManager.instance.radar && timeS > 0.001f)
-        {
-            Radar.transform.Rotate(0, 1, 0, Space.Self);
-            timeS = 0.0f;
-        }
+        if(GameManager.instance.radar) Radar.transform.Rotate(0, 1, 0, Space.Self);
 
         //魚雷
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameManager.instance.torpedo[0] == 0 && transform.position.y > -15)
