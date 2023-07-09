@@ -21,7 +21,7 @@ public class SpeedUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed = player.GetComponent<Rigidbody>().velocity.magnitude * 1.94384;
+        speed = player.GetComponent<Rigidbody>().velocity.magnitude * 1.94;
         string text_s = string.Format("{0:f1}", speed);
         speedText.text = "Speed(konts): " + $"{text_s, 4}";
     }

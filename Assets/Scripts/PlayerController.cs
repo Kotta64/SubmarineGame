@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public GameObject prefabTorpedo;
     private float rotateSpeed;
     private float muki;
+    private float a;
+    private float currentTime;
 
     void Start()
     {
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Screw_r.transform.Rotate(0, -rotateSpeed, 0, Space.Self);
 
         //前進後退
-        rb.AddForce(rb.transform.right * GameManager.instance.throttle * -1500000);
+        rb.AddForce(rb.transform.right * GameManager.instance.throttle * -1000000);
 
         //バラストタンク
         if (Input.GetKey(KeyCode.UpArrow)) GameManager.instance.ballastTank += 0.03F;
