@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         torpedoRange = 0.1F;
         battery = 100.0f;
         caveat = 0;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame

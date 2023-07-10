@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.torpedo[1] == 0)
         {
             GameManager.instance.torpedo[1] = 1000;
-            Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point2").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point2").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y - GameManager.instance.torpedoRange/2, 0.0f));
+            Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point2").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point2").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y - GameManager.instance.torpedoRange/3, 0.0f));
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.torpedo[2] == 0)
         {
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4) && GameManager.instance.torpedo[3] == 0)
         {
             GameManager.instance.torpedo[3] = 1000;
-            Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point4").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point4").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y + GameManager.instance.torpedoRange/2, 0.0f));
+            Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point4").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point4").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y + GameManager.instance.torpedoRange/3, 0.0f));
         }
         if (Input.GetKey(KeyCode.LeftArrow)) GameManager.instance.torpedoRange -= 0.01F;
         if (Input.GetKey(KeyCode.RightArrow)) GameManager.instance.torpedoRange += 0.01F;
