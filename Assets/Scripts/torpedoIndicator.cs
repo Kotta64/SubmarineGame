@@ -21,10 +21,9 @@ public class torpedoIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, 2.0F, transform.position.z);
-        torpedo1.transform.localRotation = Quaternion.Euler(0.0f, -GameManager.instance.torpedoRange/2, 0.0f);
+        torpedo1.transform.localRotation = Quaternion.Euler(0.0f, -GameManager.instance.torpedoRange/4, 0.0f);
         torpedo2.transform.localRotation = Quaternion.Euler(0.0f, -GameManager.instance.torpedoRange, 0.0f);
-        torpedo3.transform.localRotation = Quaternion.Euler(0.0f, GameManager.instance.torpedoRange/2, 0.0f);
+        torpedo3.transform.localRotation = Quaternion.Euler(0.0f, GameManager.instance.torpedoRange/4, 0.0f);
         torpedo4.transform.localRotation = Quaternion.Euler(0.0f, GameManager.instance.torpedoRange, 0.0f);
     }
 }

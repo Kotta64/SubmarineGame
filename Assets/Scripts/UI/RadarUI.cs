@@ -6,6 +6,7 @@ public class RadarUI : MonoBehaviour
 {
     private GameObject icon;
     private GameObject pointer;
+    private GameObject dentan;
     private bool oldState;
 
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class RadarUI : MonoBehaviour
     {
         icon = transform.Find("Icon").gameObject;
         pointer = transform.Find("Pointer").gameObject;
+        dentan = GameObject.Find("Dentan").gameObject;
         oldState = true;
     }
 
@@ -25,6 +27,14 @@ public class RadarUI : MonoBehaviour
             pointer.SetActive(GameManager.instance.radar);
             oldState = GameManager.instance.radar;
         }
-        if (GameManager.instance.radar) pointer.GetComponent<RectTransform>().Rotate(0, 0, -1);
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.instance.radar)
+        {
+            pointer.GetComponent<RectTransform>().Rotate(0, 0, -3);
+            dentan.transform.Rotate(0, 3, 0, Space.Self);
+        }
     }
 }

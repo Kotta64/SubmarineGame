@@ -18,11 +18,11 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float dis = Vector3.Distance(player.transform.position, enemy.transform.position);
         if (dis < 3300 && GameManager.instance.radar) icon.SetActive(true);
         else icon.SetActive(false);
-        transform.Rotate(0, 0.001F, 0, Space.Self);
+        transform.Rotate(0, 0.002F, 0, Space.Self);
     }
 }
