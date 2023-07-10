@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private GameObject Screw_r;
     private GameObject Radar;
     public GameObject prefabTorpedo;
+    private GameObject enemy;
     private float rotateSpeed;
     private float muki;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
         Screw_l = rb.transform.Find("Screw_L").gameObject;
         Screw_r = rb.transform.Find("Screw_R").gameObject;
         Radar = rb.transform.Find("Dentan").gameObject;
+        enemy = GameObject.Find("Enemy");
         rotateSpeed = 0.0F;
         muki = 0.0F;
     }
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
         //電探N
         if (Input.GetKeyDown(KeyCode.L)) GameManager.instance.radar = !GameManager.instance.radar;
-        if (transform.position.y < -7.5F) GameManager.instance.radar = false;
+        if (transform.position.y < -7.8F) GameManager.instance.radar = false;
 
         //魚雷生成N
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameManager.instance.torpedo[0] == 0)
@@ -64,6 +66,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) GameManager.instance.torpedoRange -= 0.01F;
         if (Input.GetKey(KeyCode.RightArrow)) GameManager.instance.torpedoRange += 0.01F;
         GameManager.instance.torpedoRange = Mathf.Clamp(GameManager.instance.torpedoRange, 0.1F, 4.0F);
+
+        //発見
+        float dis = Vector3.Distance(transform.position, enemy.transform.position);
+        if (dis < 2000f && dis > 1000f && transform.position.y > -6.5f) GameManager.instance.caveat = 1;
+        else if (dis < 1500f && transform.position.y > -10f) GameManager.instance.caveat = 2;
+        else GameManager.instance.caveat = 0;
     }
 
     private void FixedUpdate()
@@ -82,9 +90,9 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.ballastTank = Mathf.Clamp(GameManager.instance.ballastTank, 0, 100);
 
         //バッテリーF
-        if (transform.position.y < -7.5f)
+        if (transform.position.y < -7.8f)
         {
-            GameManager.instance.battery -= (Mathf.Abs(GameManager.instance.throttle) + 1.0f) / 300;
+            GameManager.instance.battery -= (Mathf.Abs(GameManager.instance.throttle) + 1.0f) / 200;
         }
         else
         {
@@ -94,9 +102,9 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.battery = Mathf.Clamp(GameManager.instance.battery, 0.0f, 100.0f);
 
         //旋回F
-        if (Input.GetKey(KeyCode.A)) muki -= 0.001F;
-        else if (Input.GetKey(KeyCode.D)) muki += 0.001F;
-        else if (muki != 0.0F) muki -= 0.001F * muki / Mathf.Abs(muki);
+        if (Input.GetKey(KeyCode.A)) muki -= 0.005F;
+        else if (Input.GetKey(KeyCode.D)) muki += 0.005F;
+        else if (muki != 0.0F) muki -= 0.005F * muki / Mathf.Abs(muki);
         muki = Mathf.Clamp(muki, -0.02F, 0.02F);
         transform.Rotate(0, muki, 0, Space.Self);
 

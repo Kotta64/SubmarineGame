@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float ballastTank;
     public bool radar;
     public float battery;
+    public int caveat;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         radar = false;
         torpedoRange = 0.1F;
         battery = 100.0f;
+        caveat = 0;
     }
 
     // Update is called once per frame
