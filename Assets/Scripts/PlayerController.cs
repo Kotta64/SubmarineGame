@@ -63,9 +63,6 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.torpedo[3] = 1000;
             Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point4").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point4").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y + GameManager.instance.torpedoRange/3, 0.0f));
         }
-        if (Input.GetKey(KeyCode.LeftArrow)) GameManager.instance.torpedoRange -= 0.01F;
-        if (Input.GetKey(KeyCode.RightArrow)) GameManager.instance.torpedoRange += 0.01F;
-        GameManager.instance.torpedoRange = Mathf.Clamp(GameManager.instance.torpedoRange, 0.1F, 4.0F);
 
         //発見
         float dis = Vector3.Distance(transform.position, enemy.transform.position);
@@ -116,5 +113,9 @@ public class PlayerController : MonoBehaviour
                 GameManager.instance.torpedo[i] -= 1;
             }
         }
+        //魚雷散布界
+        if (Input.GetKey(KeyCode.LeftArrow)) GameManager.instance.torpedoRange -= 0.05F;
+        if (Input.GetKey(KeyCode.RightArrow)) GameManager.instance.torpedoRange += 0.05F;
+        GameManager.instance.torpedoRange = Mathf.Clamp(GameManager.instance.torpedoRange, 0.1F, 4.0F);
     }
 }

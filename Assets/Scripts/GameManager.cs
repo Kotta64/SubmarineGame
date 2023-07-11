@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool radar;
     public float battery;
     public int caveat;
+    public int enemy_hp;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         battery = 100.0f;
         caveat = 0;
         Application.targetFrameRate = 60;
+        enemy_hp = 100;
     }
 
     // Update is called once per frame

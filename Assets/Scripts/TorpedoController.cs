@@ -24,7 +24,7 @@ public class TorpedoController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy") Debug.Log("Enemy!!");
+        if (other.gameObject.tag == "Enemy") GameManager.instance.enemy_hp -= 25;
         Vector3 hitPos = other.contacts[0].point;
         Instantiate(particleObject, hitPos, Quaternion.identity);
         Destroy(gameObject);

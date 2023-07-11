@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
     private GameObject icon;
+    private bool key = true;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +27,19 @@ public class EnemyController : MonoBehaviour
         if (dis < 3300 && GameManager.instance.radar) icon.SetActive(true);
         else icon.SetActive(false);
         //transform.Rotate(0, 0.002F, 0, Space.Self);
+    }
+
+    private void clearScene()
+    {
+        FadeManager.Instance.LoadScene("ClearScene", 1.0f);
+    }
+
+    private void Update()
+    {
+        if(GameManager.instance.enemy_hp <= 0 && key)
+        {
+            Invoke("clearScene", 2.0f);
+            key = false;
+        }
     }
 }
