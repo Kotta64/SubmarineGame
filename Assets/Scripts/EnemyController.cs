@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         enemy = transform.Find("Enemy").gameObject;
         icon = transform.Find("Enemy/Icon").gameObject;
+        transform.rotation = Quaternion.Euler(0f, Random.Range(-180f, 180f), 0f);
     }
 
     // Update is called once per frame

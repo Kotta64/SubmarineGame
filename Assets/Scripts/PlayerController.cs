@@ -23,6 +23,18 @@ public class PlayerController : MonoBehaviour
         enemy = GameObject.Find("Enemy");
         rotateSpeed = 0.0F;
         muki = 0.0F;
+        Reset_Data();
+    }
+
+    private void Reset_Data()
+    {
+        GameManager.instance.throttle = 0;
+        GameManager.instance.ballastTank = 40.0F;
+        GameManager.instance.radar = false;
+        GameManager.instance.torpedoRange = 0.1F;
+        GameManager.instance.battery = 100.0f;
+        GameManager.instance.caveat = 0;
+        GameManager.instance.enemy_hp = 100;
     }
 
     void Update()
@@ -83,7 +95,7 @@ public class PlayerController : MonoBehaviour
         //バッテリーF
         if (transform.position.y < -7.8f)
         {
-            GameManager.instance.battery -= (Mathf.Abs(GameManager.instance.throttle) + 1.0f) / 200;
+            GameManager.instance.battery -= (Mathf.Abs(GameManager.instance.throttle) + 1.0f) / 400;
         }
         else
         {
@@ -93,9 +105,9 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.battery = Mathf.Clamp(GameManager.instance.battery, 0.0f, 100.0f);
 
         //旋回F
-        if (Input.GetKey(KeyCode.A)) muki -= 0.005F;
-        else if (Input.GetKey(KeyCode.D)) muki += 0.005F;
-        else if (muki != 0.0F) muki -= 0.005F * muki / Mathf.Abs(muki);
+        if (Input.GetKey(KeyCode.A)) muki -= 0.001F;
+        else if (Input.GetKey(KeyCode.D)) muki += 0.001F;
+        else if (muki != 0.0F) muki -= 0.001F * muki / Mathf.Abs(muki);
         muki = Mathf.Clamp(muki, -0.1F, 0.1F);
         transform.Rotate(0, muki, 0, Space.Self);
 
@@ -117,11 +129,10 @@ public class PlayerController : MonoBehaviour
         {
             float dis = Vector3.Distance(transform.position, enemy.transform.position);
             int rnd = Random.Range(1, 1000);
-
             if (dis < 1500f && transform.position.y > -10f)
             {
                 GameManager.instance.caveat = 2;
-                if (rnd % 500 == 1) GameManager.instance.caveat = 3;
+                if (rnd == 1) GameManager.instance.caveat = 3;
             }else if (dis < 2000f && transform.position.y > -6.5f)
             {
                 GameManager.instance.caveat = 1;

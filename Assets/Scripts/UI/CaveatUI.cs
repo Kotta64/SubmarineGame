@@ -19,7 +19,7 @@ public class CaveatUI : MonoBehaviour
         FindObject.SetActive(false);
     }
 
-    void Back2Menu()
+    private void Back2Menu()
     {
         FadeManager.Instance.LoadScene("MenuScene", 1.0f);
     }
@@ -47,7 +47,6 @@ public class CaveatUI : MonoBehaviour
                     FindObject.SetActive(true);
                     caveatText.text = "発見されてしまった";
                     flg = false;
-                    GameManager.instance.Reset_Data();
                     Invoke("Back2Menu", 3.0f);
                     break;
             }
