@@ -63,12 +63,6 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.torpedo[3] = 1000;
             Instantiate(prefabTorpedo, new Vector3(transform.Find("Indicators/Point4").gameObject.transform.position.x, transform.position.y + 0.5f, transform.Find("Indicators/Point4").gameObject.transform.position.z), Quaternion.Euler(0.0f, -90.0f + transform.eulerAngles.y + GameManager.instance.torpedoRange/3, 0.0f));
         }
-
-        //発見
-        float dis = Vector3.Distance(transform.position, enemy.transform.position);
-        if (dis < 2000f && dis > 1000f && transform.position.y > -6.5f) GameManager.instance.caveat = 1;
-        else if (dis < 1500f && transform.position.y > -10f) GameManager.instance.caveat = 2;
-        else GameManager.instance.caveat = 0;
     }
 
     private void FixedUpdate()
@@ -102,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) muki -= 0.005F;
         else if (Input.GetKey(KeyCode.D)) muki += 0.005F;
         else if (muki != 0.0F) muki -= 0.005F * muki / Mathf.Abs(muki);
-        muki = Mathf.Clamp(muki, -0.02F, 0.02F);
+        muki = Mathf.Clamp(muki, -0.1F, 0.1F);
         transform.Rotate(0, muki, 0, Space.Self);
 
         //魚雷クールタイム
@@ -117,5 +111,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) GameManager.instance.torpedoRange -= 0.05F;
         if (Input.GetKey(KeyCode.RightArrow)) GameManager.instance.torpedoRange += 0.05F;
         GameManager.instance.torpedoRange = Mathf.Clamp(GameManager.instance.torpedoRange, 0.1F, 4.0F);
+
+        //発見
+        if (GameManager.instance.caveat != 3)
+        {
+            float dis = Vector3.Distance(transform.position, enemy.transform.position);
+            int rnd = Random.Range(1, 1000);
+
+            if (dis < 1500f && transform.position.y > -10f)
+            {
+                GameManager.instance.caveat = 2;
+                if (rnd % 500 == 1) GameManager.instance.caveat = 3;
+            }else if (dis < 2000f && transform.position.y > -6.5f)
+            {
+                GameManager.instance.caveat = 1;
+                if (rnd == 1) GameManager.instance.caveat = 3;
+            }
+            else GameManager.instance.caveat = 0;
+        }
     }
 }

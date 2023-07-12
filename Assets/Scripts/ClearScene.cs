@@ -26,7 +26,7 @@ public class ClearScene : MonoBehaviour
             Instantiate(exp, EnemyObject.transform.position, Quaternion.identity);
             key = false;
         }
-        else if (EnemyObject.transform.position.y > -80.0f)
+        else if (EnemyObject.transform.position.y > -50.0f)
         {
             EnemyObject.transform.position = new Vector3(0, EnemyObject.transform.position.y - 0.1f, 0);
             cnv.SetActive(true);

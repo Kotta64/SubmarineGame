@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Reset_Data()
     {
         throttle = 0;
         ballastTank = 40.0F;
@@ -36,8 +35,14 @@ public class GameManager : MonoBehaviour
         torpedoRange = 0.1F;
         battery = 100.0f;
         caveat = 0;
-        Application.targetFrameRate = 60;
         enemy_hp = 100;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Reset_Data();
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
