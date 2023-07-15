@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class tenmetsu : MonoBehaviour
 {
     private float n;
-    private bool up;
+    private bool up, flg = true;
     // Start is called before the first frame update
+
     void Start()
     {
         n = 1.0f;
         up = false;
     }
-
 
     private void Update()
     {

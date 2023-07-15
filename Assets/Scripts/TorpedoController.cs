@@ -6,7 +6,9 @@ public class TorpedoController : MonoBehaviour
 {
     public GameObject particleObject;
     public GameObject raiseki;
+    public AudioClip exp_sound;
     private GameObject Obj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,17 @@ public class TorpedoController : MonoBehaviour
     private void EnableCollider()
     {
         GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(exp_sound);
     }
 
     void OnCollisionEnter(Collision other)
     {
         Vector3 hitPos = other.contacts[0].point;
-        if (other.gameObject.tag == "Enemy") GameManager.instance.enemy_hp -= 25;
-        if(other.gameObject.tag != "Wall") Instantiate(particleObject, hitPos, Quaternion.identity);
+        if (other.gameObject.tag == "Enemy")
+        {
+            GameManager.instance.enemy_hp -= 25;
+        }
+        if (other.gameObject.tag != "Wall") Instantiate(particleObject, hitPos, Quaternion.identity);
         Destroy(gameObject);
     }
 

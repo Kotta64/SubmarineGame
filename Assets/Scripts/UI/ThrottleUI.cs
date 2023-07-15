@@ -8,6 +8,7 @@ public class ThrottleUI : MonoBehaviour
     private GameObject lever;
     private GameObject now;
     private int oldThrottle;
+    public AudioClip sound;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class ThrottleUI : MonoBehaviour
             lever.GetComponent<Slider>().value = GameManager.instance.throttle;
             now.GetComponent<RectTransform>().localPosition = new Vector3(100, -115 + GameManager.instance.throttle * 76, 0);
             oldThrottle = GameManager.instance.throttle;
+            GetComponent<AudioSource>().PlayOneShot(sound);
         }
     }
 }

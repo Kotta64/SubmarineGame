@@ -9,6 +9,8 @@ public class CaveatUI : MonoBehaviour
     private GameObject CaveatObject;
     private GameObject FindObject;
     private bool flg = true;
+    public AudioClip out_s;
+    public AudioClip warning_s;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,17 +37,26 @@ public class CaveatUI : MonoBehaviour
                     CaveatObject.gameObject.SetActive(false);
                     break;
                 case 1:
-                    CaveatObject.gameObject.SetActive(true);
-                    caveatText.text = "発見される可能性があります!!\n潜望鏡深度まで潜航してください";
+                    if (!CaveatObject.gameObject.activeSelf)
+                    {
+                        CaveatObject.gameObject.SetActive(true);
+                        caveatText.text = "発見される可能性があります!!\n潜望鏡深度まで潜航してください";
+                        GetComponent<AudioSource>().PlayOneShot(warning_s);
+                    }
                     break;
                 case 2:
-                    CaveatObject.gameObject.SetActive(true);
-                    caveatText.text = "発見される可能性があります!!\n潜航してください";
+                    if (!CaveatObject.gameObject.activeSelf)
+                    {
+                        CaveatObject.gameObject.SetActive(true);
+                        caveatText.text = "発見される可能性があります!!\n潜航してください";
+                        GetComponent<AudioSource>().PlayOneShot(warning_s);
+                    }
                     break;
                 case 3:
                     CaveatObject.gameObject.SetActive(true);
                     FindObject.SetActive(true);
                     caveatText.text = "発見されてしまった";
+                    GetComponent<AudioSource>().PlayOneShot(out_s);
                     flg = false;
                     Invoke("Back2Menu", 3.0f);
                     break;
