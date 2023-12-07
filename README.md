@@ -13,3 +13,6 @@
 - 1~4 : 魚雷発射
 - Tab : 支店変更
 - L : レーダーのON/OFF
+
+# ダウンロード先
+https://drive.google.com/drive/folders/1T-EOrV2TGYcH3V5ITVqRNivhoJJZFx9X
